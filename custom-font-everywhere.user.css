@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Global Typography Override
 @namespace      github.com/openstyles/stylus
-@version        3.0.0
+@version        3.1.0
 @description    Aggressive global font replacement
 @author         Me
 ==/UserStyle== */
@@ -49,10 +49,29 @@ body *:not(.material-icons)
        :not([data-icon])
        :not(svg)
        :not(svg *)
-       :not(path) {
+       :not(path)
+       :not(button)
+       :not([class*="btn"])
+       :not([class*="btn-"])
+       :not([class*="-btn"])
+       :not([class*="card"])
+       :not([class*="Card"])
+       :not([class*="label"])
+       :not([class*="Label"])
+       :not([class*="chip"])
+       :not([class*="Chip"])
+       :not([class*="badge"])
+       :not([class*="Badge"])
+       :not([class*="tag"])
+       :not([class*="Tag"])
+       :not([class*="menu-item"])
+       :not([class*="menuitem"])
+       :not([role="button"])
+       :not([role="menuitem"])
+       :not([aria-label]) {
 
     	font-family: var(--font-sans), sans-serif !important;
-		font-weight : 420 !important ; 
+		font-weight : 420 !important ;
 }
 
 /* =========================================

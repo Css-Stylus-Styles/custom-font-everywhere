@@ -1,0 +1,200 @@
+/* ==UserStyle==
+@name           Global Typography Override
+@namespace      github.com/openstyles/stylus
+@version        3.0.0
+@description    Aggressive global font replacement
+@author         Me
+==/UserStyle== */
+
+@-moz-document regexp(".*") {
+
+/* =========================================
+   Root Variables
+========================================= */
+
+:root {
+    --font-serif: "Test Tiempos Text" !important;
+    --font-sans: "SF Pro Text" !important;
+    --font-mono: "Geist Mono" !important;
+	--medium-weight : 500 !important ;
+	--bolder-weight : 550 !important ;  
+}
+
+/* =========================================
+   Global Sans Typography
+========================================= */
+
+html,
+body,
+body *:not(.material-icons)
+       :not(.material-symbols-outlined)
+       :not(.material-symbols-rounded)
+       :not(.material-symbols-sharp)
+       :not(.material-symbols-two-tone)
+       :not(.google-symbols)
+       :not(.fa)
+       :not(.fas)
+       :not(.far)
+       :not(.fab)
+       :not(.fal)
+       :not(.fat)
+       :not(.ph)
+       :not(.ph-fill)
+       :not(.lucide)
+       :not(.codicon)
+       :not(.octicon)
+       :not(.devicon)
+       :not([class*="icon"])
+       :not([class*="Icon"])
+       :not([data-icon])
+       :not(svg)
+       :not(svg *)
+       :not(path) {
+
+    	font-family: var(--font-sans), sans-serif !important;
+		font-weight : 420 !important ; 
+}
+
+/* =========================================
+   Serif Surfaces
+========================================= */
+
+article,
+blockquote,
+q,
+em,
+i,
+.serif,
+[class*="serif"] {
+    font-family: var(--font-serif), serif !important;
+}
+
+/* =========================================
+   AGGRESSIVE CODE DETECTION
+========================================= */
+
+code,
+code *,
+pre,
+pre *,
+kbd,
+kbd *,
+samp,
+samp *,
+tt,
+tt *,
+
+[class*="code"],
+[class*="Code"],
+[class*="CODE"],
+
+[class*="mono"],
+[class*="Mono"],
+
+[class*="editor"],
+[class*="Editor"],
+
+[class*="terminal"],
+[class*="Terminal"],
+
+[class*="syntax"],
+[class*="Syntax"],
+
+[class*="highlight"],
+[class*="Highlight"],
+
+[class*="prism"],
+[class*="Prism"],
+
+[class*="token"],
+[class*="Token"],
+
+[class*="monaco"],
+[class*="Monaco"],
+
+[class*="cm-"],
+[class*="CodeMirror"],
+
+[class*="hljs"],
+
+[data-code],
+[data-language],
+[data-highlighted],
+
+[role="code"],
+[role="textbox"],
+
+textarea,
+textarea *,
+
+pre span,
+code span,
+
+pre div,
+code div {
+
+    font-family: var(--font-mono), monospace !important;
+    font-variant-ligatures: normal !important;
+}
+
+/* =========================================
+   Monaco / VSCode Web
+========================================= */
+
+.monaco-editor,
+.monaco-editor *,
+.view-lines,
+.view-line,
+.view-line *,
+
+.overflow-guard,
+.inputarea,
+.inputarea * {
+    font-family: var(--font-mono), monospace !important;
+	
+}
+
+/* =========================================
+   CodeMirror
+========================================= */
+
+.CodeMirror,
+.CodeMirror *,
+.cm-editor,
+.cm-editor *,
+.cm-content,
+.cm-content * {
+    font-family: var(--font-mono), monospace !important;
+}
+
+/* =========================================
+   GitHub / Shiki / Prism
+========================================= */
+
+.highlight,
+.highlight *,
+.blob-code,
+.blob-code *,
+.shiki,
+.shiki *,
+.token,
+.token * {
+    font-family: var(--font-mono), monospace !important;
+}
+
+/* =========================================
+   Prevent Icon Breakage
+========================================= */
+
+
+/* =========================================
+   Rendering Improvements
+========================================= */
+
+html {
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+}

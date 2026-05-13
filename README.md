@@ -38,3 +38,7 @@ Enables `optimizeLegibility` and font smoothing.
 - Uses `regexp(".*")` to match all domains
 - `!important` is used throughout to override site styles
 - Icons are explicitly excluded to prevent breakage
+
+## TODO
+
+- [ ] Add edge cases / observations here

@@ -44,7 +44,6 @@ body *:not(button)
        :not([class*="menuitem"])
        :not([role="button"])
        :not([role="menuitem"])
-
       /* These were added due to AI studio website */
        :not([role="ms-button"])
        :not([role="ms-icon-button"])
@@ -77,6 +76,12 @@ textarea::placeholder {
    Serif Surfaces
 ========================================= */
 
+p,
+li,
+ol,
+ul,
+span,
+div,
 article,
 blockquote,
 q,
@@ -101,6 +106,8 @@ samp,
 samp *,
 tt,
 tt *,
+strong,
+strong *,
 
 [class*="code"],
 [class*="Code"],

@@ -6,6 +6,13 @@ A Stylus user style that forces three custom fonts on every website:
 - **Test Tiempos Text** for articles, quotes, italics
 - **Geist Mono** for code, editors, terminals
 
+## Scope
+
+By default this style applies to every site **except** `github.com`
+— the rule is scoped with a negative-lookahead regex inside
+`@-moz-document`. See [exclusion.md](exclusion.md) for the full
+explanation and instructions on adding more sites.
+
 ## Install
 
 1. Install the [Stylus](https://github.com/openstyles/stylus) browser extension.
@@ -51,7 +58,4 @@ A Stylus user style that forces three custom fonts on every website:
 
 ## TODO
 
-- [ ] Document the per-site Qwen AI Markdown override
-- [ ] Google Flash lite info page (some icons don't work there)
-- [ ] Try replacing the universal `body *:not(...)` selector with a
-  `:where()` version to lower specificity and speed up matching
+- [ ] Claude AI page does not work  

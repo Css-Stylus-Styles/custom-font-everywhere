@@ -42,25 +42,6 @@ A Stylus user style that replaces fonts across all websites.
 - Serif surfaces are intentionally narrow: paragraphs and spans inherit
   from their parent, so text inside `<article>` still renders in serif.
 
-## Changelog
-
-### 3.1.4
-- **Fixed:** `svg, svg * { all: revert }` was collapsing SVG icons on
-  Qwen AI, AI Studio, and similar sites, leaving large empty bands at
-  the top of the page. Replaced with targeted `font-family`/`font-weight`/
-  `font-size` revert.
-- **Fixed:** `strong` and `strong *` were being forced to monospace,
-  which broke bold text everywhere. Removed from the code block.
-- **Fixed:** Serif rule was overriding the sans rule for `<p>`, `<li>`,
-  `<ol>`, `<ul>`, `<span>`, `<div>` (cascade order), so most text ended
-  up in serif on most sites. Serif now only applies to `article`,
-  `blockquote`, `q`, `em`, `i`, `.serif`, `[class*="serif"]`.
-- **Fixed:** `<i>` elements with icon classes (Font Awesome) were
-  matching the serif rule directly. Added icon exclusions to the `i`
-  selector in the serif block.
-- Fixed `[class* ="mat-mdc-button"]` whitespace and removed the
-  `:not([role=""])` debug artifact.
-
 ## TODO
 
 - [ ] Add Qwen AI Markdown to the documented per-site overrides

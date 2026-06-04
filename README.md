@@ -1,51 +1,57 @@
 # Global Typography Override
 
-A Stylus user style that replaces fonts across all websites.
+A Stylus user style that forces three custom fonts on every website:
 
-## Font Variables
+- **SF Pro Text** for body text
+- **Test Tiempos Text** for articles, quotes, italics
+- **Geist Mono** for code, editors, terminals
 
-| Variable | Font | Purpose |
-|----------|------|---------|
+## Install
+
+1. Install the [Stylus](https://github.com/openstyles/stylus) browser extension.
+2. Open `custom-font-everywhere.user.css` in Stylus (or paste its contents
+   into a new style).
+3. Make sure the three fonts above are installed on your system. If they
+   aren't, the browser falls back to the generic `sans-serif`, `serif`,
+   and `monospace` and results will vary by OS.
+
+## Fonts
+
+| Variable | Font | Used for |
+|----------|------|----------|
 | `--font-sans` | SF Pro Text | Default body text |
-| `--font-serif` | Test Tiempos Text | Articles, quotes, emphasized text |
-| `--font-mono` | Geist Mono | Code blocks, editors, terminals |
+| `--font-serif` | Test Tiempos Text | Articles, quotes, `<em>`, `<i>` |
+| `--font-mono` | Geist Mono | Code, editors, terminals |
 
-> The named fonts must be installed on your system. If they aren't, the
-> browser falls back to the generic family (`sans-serif`, `serif`,
-> `monospace`) and results will vary by OS.
+## How it's structured
 
-## Sections
+| Block | What it does |
+|-------|--------------|
+| Global Sans | Sets the default font on almost everything, with a long `:not()` chain to skip buttons, cards, labels, icons, and other UI primitives |
+| Serif Surfaces | Overrides to serif for `<article>`, `<blockquote>`, `<q>`, `<em>`, `<i>`, and any element with `serif` in its class |
+| Code Detection | Monospace for `<code>`, `<pre>`, `<kbd>`, and any class containing `code`, `mono`, `editor`, `terminal`, `syntax`, `prism`, `token`, `hljs`, etc. |
+| Editor-specific | Extra coverage for Monaco, CodeMirror, Shiki, Prism |
+| Icon revert | Two layers of protection: a targeted font-only revert on all SVGs, plus a nuclear revert for Lucide / Font Awesome / Material / MDI |
 
-| Section | Purpose |
-|---------|---------|
-| Root Variables | Defines the three font custom properties |
-| Global Sans Typography | Applies `--font-sans` to everything, with broad exclusions for buttons/cards/icons/UI primitives |
-| Placeholders | Serif for textareas and `[role="textbox"]` elements |
-| Serif Surfaces | Serif for `<article>`, `<blockquote>`, `<q>`, `<em>`, `<i>` |
-| Aggressive Code Detection | Monospace for `<code>`, `<pre>`, `[class*="code"]`, `[class*="mono"]`, `[class*="editor"]`, etc. |
-| Monaco / VSCode Web | Monospace inside Monaco editor web instances |
-| CodeMirror | Monospace inside CodeMirror-based editors |
-| GitHub / Shiki / Prism | Monospace inside syntax highlight containers |
-| Prevent Icon Breakage | Targeted font revert on SVGs (does not collapse icons) |
-| Restore icons | Nuclear revert for common icon systems (Lucide, Font Awesome, Material, MDI) |
-| Rendering Improvements | `optimizeLegibility`, antialiased font smoothing |
+## Gotchas
 
-## Notes
-
-- Uses `regexp(".*")` to match all domains
-- `!important` is used throughout to override site styles
-- Icon classes are excluded from the sans rule; a separate revert block
-  catches icon systems whose classes don't contain `"icon"` (Lucide,
-  Font Awesome `fa-*`, Material, MDI, etc.)
-- **Do not** use `all: revert` on SVGs — it strips `width`/`height`/`fill`
-  and collapses the icons. Only revert font properties.
-- Serif surfaces are intentionally narrow: paragraphs and spans inherit
-  from their parent, so text inside `<article>` still renders in serif.
+- **SVG icons are fragile.** Never use `all: revert` on SVGs — it strips
+  `width`, `height`, and `fill`, collapsing the icons to nothing. Only
+  revert font properties.
+- **Cascade order matters.** The serif block must come *after* the sans
+  block, otherwise the sans rule wins and serif is a no-op. If you
+  rearrange, double-check with the browser inspector.
+- **`[class*="icon"]` is a broad hammer.** It matches anything containing
+  the substring `icon` (e.g. `unicorn`, `iconic`). It's intentionally
+  over-broad to catch most icon classes; the targeted revert block
+  covers what it misses.
+- **`!important` is everywhere.** Sites that use higher-specificity
+  selectors or inline styles may still win. This is by design — the
+  alternative is a specificity arms race.
 
 ## TODO
 
-- [ ] Add Qwen AI Markdown to the documented per-site overrides
+- [ ] Document the per-site Qwen AI Markdown override
 - [ ] Google Flash lite info page (some icons don't work there)
-- [ ] Consider replacing the universal `body *:not(...)` selector with
-  a `:where()`-based version to lower specificity and reduce
-  per-element matching cost
+- [ ] Try replacing the universal `body *:not(...)` selector with a
+  `:where()` version to lower specificity and speed up matching

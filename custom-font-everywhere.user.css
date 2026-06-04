@@ -1,12 +1,12 @@
 /* ==UserStyle==
 @name           Global Typography Override
 @namespace      github.com/openstyles/stylus
-@version        3.1.4
-@description    Aggressive global font replacement
+@version        3.1.5
+@description    Aggressive global font replacement (excludes github.com)
 @author         Me
 ==/UserStyle== */
 
-@-moz-document regexp(".*") {
+@-moz-document regexp("^(?!.*github\\.com).*$") {
 
 /* =========================================
    Root Variables
@@ -231,8 +231,6 @@ code div {
 svg,
 svg * {
     font-family: revert !important;
-    font-weight: revert !important;
-    font-size: revert !important;
 }
 
 /* =========================================

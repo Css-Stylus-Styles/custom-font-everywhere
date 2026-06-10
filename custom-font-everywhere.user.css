@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Global Typography Override
 @namespace      github.com/openstyles/stylus
-@version        3.1.5
+@version        3.1.6
 @description    Aggressive global font replacement (excludes github.com)
 @author         Me
 ==/UserStyle== */
@@ -24,66 +24,7 @@
    Global Sans Typography
 ========================================= */
 
-html,
-body,
-body *:not(button)
-       :not([class*="btn"])
-       :not([class*="btn-"])
-       :not([class*="-btn"])
-       :not([class*="card"])
-       :not([class*="Card"])
-       :not([class*="label"])
-       :not([class*="Label"])
-       :not([class*="chip"])
-       :not([class*="Chip"])
-       :not([class*="badge"])
-       :not([class*="Badge"])
-       :not([class*="tag"])
-       :not([class*="Tag"])
-       :not([class*="menu-item"])
-       :not([class*="menuitem"])
-       :not([role="button"])
-       :not([role="menuitem"])
-      /* These were added due to AI studio website */
-       :not([role="ms-button"])
-       :not([role="ms-icon-button"])
-       :not([role="ms-menu-item"])
-       :not([role="ms-menu-button"])
-       :not([class*="ms-menu"])
-       :not([class*="mat-icon"])
-       :not([class*="mat-mdc-button"])
-       :not([role="notranslate"])
-       :not([aria-label])
-       :not(mat-icon)
-       :not(mat-button)
-       :not(mat-fab)
-       :not(mat-icon-button)
-       :not(mat-menu-item)
-       :not(mat-menu-button)
-       :not(mat-card)
-       :not(mat-list-item)
-       :not(mat-select)
-       :not(mat-option)
-       :not(mat-radio-button)
-       :not(mat-checkbox)
-       :not(mat-form-field)
-       :not(mat-slider)
-       :not(mat-grid-tile)
-       :not(mat-tab)
-       :not(mat-toolbar)
-       :not(mat-dialog-title)
-       :not(mat-dialog-content)
-       :not(mat-dialog-actions)
-       :not(mat-autocomplete)
-       /* was found on the AI studio website */
-       :not([class*="card-icon"])
-       :not([class*="icon"])
-       :not([class*="Icon"])
-     {
 
-   font-family: var(--font-sans), sans-serif !important;
-   font-weight: 420 !important;
-}
 
 
 /* Placeholders for text */

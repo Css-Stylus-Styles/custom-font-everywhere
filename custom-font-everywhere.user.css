@@ -1,218 +1,310 @@
 /* ==UserStyle==
 @name           Global Typography Override
 @namespace      github.com/openstyles/stylus
-@version        3.1.6
+@version        3.1.8
 @description    Aggressive global font replacement (excludes github.com)
 @author         Me
+@preprocessor   stylus
+@var checkbox  noLogo   "NO Hello text "                 1
+@var checkbox   noUpgrade "No Upgrade Button"            1
+@var checkbox   noGoogle "No Google Account Button"      1
+@var checkbox   noAddress "Hide your location from menu" 1
+@var checkbox   LocalFont  "Local Placeholder Font"      0
+@var checkbox   LoadWebFont  "Load Font From Web"        0
+@var select newfont 'Text Font' [
+    'Test Tiempos Text',
+    'Website Default',
+    'Geist Sans',
+    'Sf Pro Text',
+    'Test Tiempos Text Medium',
+]
+@var select headfont 'Heading Font' [
+    'Inherit',
+    'Bricolage Grotesque Variable',
+]
+
+
 ==/UserStyle== */
 
-@-moz-document regexp("^(?!.*github\\.com).*$") {
+/* Exclude github and Claude because custom styles already exist for them */
+@-moz-document regexp("^(?!.*github\\.com).*$")
+
+    /* =========================================
+       Root Variables
+    ========================================= */
+
+    :root
+        --font-serif "Test Tiempos Text" !important
+        --font-sans "SF Pro Text" !important
+        --font-mono "Geist Mono" !important
+        --medium-weight 500 !important
+        --bolder-weight 550 !important
+
+    /* =========================================
+       Global Sans Typography
+    ========================================= */
+
+    *,
+    *::before,
+    *::after
+        -webkit-font-smoothing antialiased !important
+        -moz-osx-font-smoothing grayscale !important
+        text-rendering optimizeLegibility !important
+
+    /* Root Fonts */
+    /* Only keeping basic fonts for now */
+    :root
+        --font-BricolageGrotesque "Bricolage Grotesque Variable"
+        --font-JetbrainsVar 'JetBrains Mono Variable'
+        --font-Jetbrains 'JetBrains Mono'
+        --font-GeistSans 'Geist Sans'
+        --font-GeistMono 'Geist Mono Variable'
+        --font-Tiempo "Test Tiempos Text"
+        --font-SFPro "Sf Pro Text"
+
+    /* Font Variables */
+    :root
+        --heading-font 'Bricolage Grotesque Variable'
+        --sans-serif 'Sf Pro Text'
+        --code-font 'Geist Mono'
+        --text-font 'Test Tiempos Text'
+
+    /* Text Font Selector */
+    if newfont != 'Website Default'
+        :root
+            --dropdown-text-font s('"%s"', newfont) !important
+
+        html,
+        body,
+        p,
+        li,
+        ul,
+        ol,
+        strong,
+        span,
+        article,
+        blockquote,
+        q,
+        em,
+        i:not([class*="icon"]):not([class*="Icon"]):not(mat-icon):not([data-icon]):not([data-lucide]),
+        .serif,
+        [class*="serif"]
+        div
+            font-family var(--dropdown-text-font) !important
+            font-weight 500 !important
+    else
+        html,
+        body,
+        p,
+        li,
+        ul,
+        ol,
+        strong,
+        span,
+        article,
+        blockquote,
+        q,
+        i:not([class*="icon"]):not([class*="Icon"]):not(mat-icon):not([data-icon]):not([data-lucide]),
+        .serif,
+        [class*="serif"]
+        div
+            font-family system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important
+
+
 
 /* =========================================
-   Root Variables
-========================================= */
+ * Heading Font Selector
+ * When you select  the h    eading font it will use Bricoalge Grotesque Font and put that in headfont variable
+ * if you select inherit then it will use the default font and just make it bold and appear as heading
+ * new font in else was defined in the function down below based on the text font drop down
+ ========================================== */
 
-:root {
-    --font-serif: "Test Tiempos Text" !important;
-    --font-sans: "SF Pro Text" !important;
-    --font-mono: "Geist Mono" !important;
-	--medium-weight : 500 !important ;
-	--bolder-weight : 550 !important ;  
-}
+    if headfont !='Inherit' {
 
-/* =========================================
-   Global Sans Typography
-========================================= */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5
+        h6, 
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6, 
+        h1 > * , 
+        h2 > * , 
+        h3 > * , 
+        h4 > * , 
+        h5 > * , 
+        h6 > * , 
+        {
+            font-family: var(--default-heading-font), system-ui, -apple-system, sans-serif !important;
+        }
+    }
 
+    else {
 
-
-
-/* Placeholders for text */
-
-[role="textbox"],
-
-textarea,
-textarea *,
-textarea::placeholder {
-
-	font-family: var(--font-serif), serif !important;
-   font-weight: 420 !important;
-}
-
-/* =========================================
-   Serif Surfaces
-========================================= */
-
-article,
-blockquote,
-q,
-em,
-i:not([class*="icon"]):not([class*="Icon"]):not(mat-icon):not([data-icon]):not([data-lucide]),
-.serif,
-[class*="serif"] {
-    font-family: var(--font-serif), serif !important;
-}
-
-/* =========================================
-   AGGRESSIVE CODE DETECTION
-========================================= */
-
-code,
-code *,
-pre,
-pre *,
-kbd,
-kbd *,
-samp,
-samp *,
-tt,
-tt *,
-
-[class*="code"],
-[class*="Code"],
-[class*="CODE"],
-
-[class*="mono"],
-[class*="Mono"],
-
-[class*="editor"],
-[class*="Editor"],
-
-[class*="terminal"],
-[class*="Terminal"],
-
-[class*="syntax"],
-[class*="Syntax"],
-
-[class*="highlight"],
-[class*="Highlight"],
-
-[class*="prism"],
-[class*="Prism"],
-
-[class*="token"],
-[class*="Token"],
-
-[class*="monaco"],
-[class*="Monaco"],
-
-[class*="cm-"],
-[class*="CodeMirror"],
-
-[class*="hljs"],
-
-[data-code],
-[data-language],
-[data-highlighted],
-
-[role="code"],
-
-
-pre span,
-code span,
-
-pre div,
-code div {
-
-    font-family: var(--font-mono), monospace !important;
-    font-variant-ligatures: normal !important;
-}
-
-/* =========================================
-   Monaco / VSCode Web
-========================================= */
-
-.monaco-editor,
-.monaco-editor *,
-.view-lines,
-.view-line,
-.view-line *,
-
-.overflow-guard,
-.inputarea,
-.inputarea * {
-    font-family: var(--font-mono), monospace !important;
-	
-}
-
-/* =========================================
-   CodeMirror
-========================================= */
-
-.CodeMirror,
-.CodeMirror *,
-.cm-editor,
-.cm-editor *,
-.cm-content,
-.cm-content * {
-    font-family: var(--font-mono), monospace !important;
-}
-
-/* =========================================
-   GitHub / Shiki / Prism
-========================================= */
-
-.highlight,
-.highlight *,
-.blob-code,
-.blob-code *,
-.shiki,
-.shiki *,
-.token,
-.token * {
-    font-family: var(--font-mono), monospace !important;
-}
-
-/* =========================================
-   Prevent Icon Breakage
-   Only revert font properties on SVGs so icons
-   keep their own font and don't get collapsed.
-========================================= */
-
-svg,
-svg * {
-    font-family: revert !important;
-}
-
-/* =========================================
-   Rendering Improvements
-========================================= */
-
-html {
-    text-rendering: optimizeLegibility !important;
-    -webkit-font-smoothing: antialiased !important;
-    -moz-osx-font-smoothing: grayscale !important;
-}
-
-/* =========================================
-   Restore icons
-   Nuclear option: kill all our overrides on
-   elements the website set font on
-========================================= */
-
-[data-cds],
-[data-lucide],
-[data-icon],
-[class*="fa-"],
-[class*="material-icons"],
-[class*="mdi-"],
-[style*="font-family" i] {
-    font-family: revert !important;
-    font-weight: revert !important;
-}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 , 
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3,
+        .markdown-body h4,
+        .markdown-body h5,
+        .markdown-body h6, 
+        h1 > * , 
+        h2 > * , 
+        h3 > * , 
+        h4 > * , 
+        h5 > * , 
+        h6 > * , 
+        {
+            font-family: newfont, sans-serif !important;
+        }
+    }
 
 
 
 
-/* Website Specific */
-/* Qwen AI Markdown text */
-
-.qwen-markdown , div > * {
-    font-family: var(--font-serif), serif !important;
-} 
 
 
 
-}
 
 
+    /* =========================================
+       Placeholders for text
+       Role Textbox catches all text box entries on the page
+    ========================================= */
+
+    [role="textbox"],
+    textarea,
+    textarea *,
+    textarea::placeholder
+        font-family var(--font-serif), serif !important
+        font-weight 600 !important
+
+    /* =========================================
+       AGGRESSIVE CODE DETECTION
+    ========================================= */
+
+    code,
+    code *,
+    pre,
+    pre *,
+    kbd,
+    kbd *,
+    samp,
+    samp *,
+    tt,
+    tt *,
+    [class*="code"],
+    [class*="Code"],
+    [class*="CODE"],
+    [class*="mono"],
+    [class*="Mono"],
+    [class*="editor"],
+    [class*="Editor"],
+    [class*="terminal"],
+    [class*="Terminal"],
+    [class*="syntax"],
+    [class*="Syntax"],
+    [class*="highlight"],
+    [class*="Highlight"],
+    [class*="prism"],
+    [class*="Prism"],
+    [class*="token"],
+    [class*="Token"],
+    [class*="monaco"],
+    [class*="Monaco"],
+    [class*="cm-"],
+    [class*="CodeMirror"],
+    [class*="hljs"],
+    [data-code],
+    [data-language],
+    [data-highlighted],
+    [role="code"],
+    pre span,
+    code span,
+    pre div,
+    code div
+        font-family var(--font-mono), monospace !important
+        font-variant-ligatures normal !important
+
+    /* =========================================
+       Monaco / VSCode Web
+    ========================================= */
+
+    .monaco-editor,
+    .monaco-editor *,
+    .view-lines,
+    .view-line,
+    .view-line *,
+    .overflow-guard,
+    .inputarea,
+    .inputarea *
+        font-family var(--font-mono), monospace !important
+
+    /* =========================================
+       CodeMirror
+    ========================================= */
+
+    .CodeMirror,
+    .CodeMirror *,
+    .cm-editor,
+    .cm-editor *,
+    .cm-content,
+    .cm-content *
+        font-family var(--font-mono), monospace !important
+
+    /* =========================================
+       GitHub / Shiki / Prism
+    ========================================= */
+
+    .highlight,
+    .highlight *,
+    .blob-code,
+    .blob-code *,
+    .shiki,
+    .shiki *,
+    .token,
+    .token *
+        font-family var(--font-mono), monospace !important
+
+    /* =========================================
+       Prevent Icon Breakage
+       Only revert font properties on SVGs so icons
+       keep their own font and don't get collapsed.
+    ========================================= */
+
+    svg,
+    svg *
+        font-family revert !important
+
+    /* =========================================
+       Restore icons
+       Nuclear option: kill all our overrides on
+       elements the website set font on
+    ========================================= */
+
+    [data-cds],
+    [data-lucide],
+    [data-icon],
+    [class*="fa-"],
+    [class*="material-icons"],
+    [class*="mdi-"],
+    [style*="font-family" i]
+        font-family revert !important
+        font-weight revert !important
+
+    /* Website Specific */
+    /* Qwen AI Markdown text */
+
+    .qwen-markdown,
+    div > *
+        font-family var(--font-serif), serif !important
